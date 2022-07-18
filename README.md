@@ -1,7 +1,9 @@
 # Auth-App-Backend
-This is app serves as the backend to an authentication app which makes use of nodejs and mongoDB
+
+This is app serves as the backend to an authentication app which makes use of Nodejs and mongoDB
 
 ## Dependences
+
 - [Express](https://www.npmjs.com/package/express)
 - [Node](http://nodejs.org/)
 - [DotENV](https://www.npmjs.com/package/dotenv)
@@ -11,8 +13,8 @@ This is app serves as the backend to an authentication app which makes use of no
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 
+## Setting Up
 
-## Setting Up 
 - Clone the reposit0ry to your machine
 - Open up a terminal
 - Navigate into the project directory
