@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const auth = require("./auth");
 //require database connection
 const dbConnect = require("./db/dbConnect");
 const User = require("./db/userModel");
@@ -55,4 +57,66 @@ app.post("/register", (request, response) => {
     });
 });
 
+//login endpoint
+app.post("/login", (request, response) => {
+  //check if user exists
+  User.findOne({ username: request.body.username })
+    //if user exists
+    .then((user) => {
+      //compare the password entered with the hashed password in the database
+      bcrypt
+        .compare(request.body.password, user.password)
+        // if the passwords match
+        .then((passwordCheck) => {
+          // check if password matches
+          if (!passwordCheck) {
+            return response.status(400).send({
+              message: "Passwords does not match",
+              error,
+            });
+          }
+
+          //   create JWT token
+          const token = jwt.sign(
+            {
+              userId: user._id,
+              userName: user.username,
+            },
+            "RANDOM-TOKEN",
+            { expiresIn: "24h" }
+          );
+
+          //   return success response
+          response.status(200).send({
+            message: "Login Successful",
+            username: user.username,
+            token,
+          });
+        })
+        // catch error if password does not match
+        .catch((error) => {
+          response.status(400).send({
+            message: "Passowrd does not match",
+            error,
+          });
+        });
+    })
+    //catch error if user does not exist
+    .catch((error) => {
+      response.status(404).send({
+        message: "User not found",
+        error,
+      });
+    });
+});
+
+//public endpoint
+app.get("/public", (request, response) => {
+  response.json({ message: "This is endpoint has public access" });
+});
+
+//authenticated endpoint
+app.get("/auth", auth, (request, response) => {
+  response.json({ message: "You are authorised to view this endpoint" });
+});
 module.exports = app;
