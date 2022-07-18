@@ -12,7 +12,7 @@ This is app serves as the backend to an authentication app which makes use of no
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 
 
-## SETTING UP 
+## Setting Up 
 - Clone the reposit0ry to your machine
 - Open up a terminal
 - Navigate into the project directory
