@@ -15,7 +15,7 @@ This is app serves as the backend to an authentication app which makes use of No
 
 ## Setting Up
 
-- Clone the reposit0ry to your machine
+- Clone the repository to your machine
 - Open up a terminal
 - Navigate into the project directory
 - Run <code>npm install</code> to install all needed dependencies
